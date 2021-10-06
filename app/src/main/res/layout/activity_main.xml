@@ -5,15 +5,9 @@
 
     <data>
 
-        <import type="android.text.TextUtils" />
-
         <variable
             name="model"
             type="com.appsverse.teethhistory.viewModels.MainActivityViewModel" />
-
-        <variable
-            name="viewData"
-            type="com.appsverse.teethhistory.data.MainActivityViewData" />
 
         <variable
             name="teethFormulaFragment"
@@ -60,18 +54,18 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/teal_200"
-            android:visibility="@{viewData.teethFormulaFragmentVisibilityData}" />
+            android:visibility="@{model.teethFormulaFragmentVisibility}" />
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:visibility="@{viewData.eventFragmentVisibilityData}">
+            android:visibility="@{model.eventFragmentVisibilityData}">
 
             <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="@{viewData.newEventFragmentVisibilityData}">
+                android:visibility="@{model.newEventFragmentVisibility}">
 
                 <androidx.fragment.app.FragmentContainerView
                     android:id="@+id/new_event_fragment"
@@ -84,7 +78,7 @@
             <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="@{viewData.editEventFragmentVisibilityData}">
+                android:visibility="@{model.editEventFragmentVisibilityData}">
 
                 <androidx.fragment.app.FragmentContainerView
                     android:id="@+id/edit_event_fragment"
@@ -98,7 +92,7 @@
                 android:name="com.appsverse.teethhistory.fragments.EventsListFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="@{viewData.eventsListFragmentVisibilityData}" />
+                android:visibility="@{model.eventsListFragmentVisibilityData}" />
         </FrameLayout>
 
 

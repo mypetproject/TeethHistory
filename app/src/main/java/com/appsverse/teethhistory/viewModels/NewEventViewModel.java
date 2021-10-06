@@ -100,7 +100,7 @@ public class NewEventViewModel extends ViewModel {
         if (photosUri != null) {
 
             for (String uri : photosUri) {
-                if (!checkUriInOtherEvents(uri)) {
+                if (checkUriInOtherEvents(uri)) {
                     File file = new File(uri);
                     file.delete();
                 }
@@ -134,12 +134,12 @@ public class NewEventViewModel extends ViewModel {
 
                     if (eventModel.getPhotosUri().contains(uri)) {
                         coincidenceCounter++;
-                        if (coincidenceCounter > 1) return true;
+                        if (coincidenceCounter > 1) return false;
                     }
                 }
             }
         }
-        return false;
+        return true;
     }
 
     private void setDefaultValues(Event event, MainActivity mainActivity) {
@@ -250,13 +250,13 @@ public class NewEventViewModel extends ViewModel {
 
         if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
 
-            mainActivity.binding.getViewData().setEventFragmentVisibilityData(View.GONE);
-            mainActivity.binding.getViewData().setTeethFormulaFragmentVisibilityData(View.VISIBLE);
+            mainActivity.binding.getModel().setEventFragmentVisibilityData(View.GONE);
+            mainActivity.binding.getModel().setTeethFormulaFragmentVisibility(View.VISIBLE);
         } else {
-            mainActivity.binding.getViewData().setEventsListFragmentVisibilityData(View.VISIBLE);
+            mainActivity.binding.getModel().setEventsListFragmentVisibilityData(View.VISIBLE);
         }
 
-        mainActivity.binding.getViewData().setNewEventFragmentVisibilityData(View.GONE);
+        mainActivity.binding.getModel().setNewEventFragmentVisibility(View.GONE);
 
         mainActivity.binding.getTeethFormulaFragment().refillEventsList();
         mainActivity.binding.getEventsListFragment().refillEventsList();
@@ -287,7 +287,7 @@ public class NewEventViewModel extends ViewModel {
     public void deleteSelectedPhotos() {
 
         for (String uri : photosListForDeleting) {
-            if (!checkUriInOtherEvents(uri)) {
+            if (checkUriInOtherEvents(uri)) {
                 File file = new File(uri);
                 file.delete();
             }
